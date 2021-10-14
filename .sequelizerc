@@ -1,0 +1,6 @@
+module.exports = {
+'config': __dirname + '/src/seq/config/database.cjs',
+'models-path': __dirname + '/src/seq/models',
+'seeders-path': __dirname + '/src/seq/database/seeders',
+'migrations-path': __dirname + '/src/seq/database/migrations'
+};
