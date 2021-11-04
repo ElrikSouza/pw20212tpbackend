@@ -7,6 +7,10 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+      usuarioId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       data: {
         allowNull: false,
         type: Sequelize.DATE,

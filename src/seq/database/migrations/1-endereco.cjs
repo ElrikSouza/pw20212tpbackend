@@ -7,6 +7,10 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+      usuarioId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       logradouro: {
         type: Sequelize.STRING(255),
         allowNull: false,

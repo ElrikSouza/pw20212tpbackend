@@ -9,7 +9,7 @@ module.exports = {
       },
       nome: {
         allowNull: false,
-        type: Sequelize.VARCHAR(255),
+        type: Sequelize.STRING(255),
       },
       preco: {
         allowNull: false,

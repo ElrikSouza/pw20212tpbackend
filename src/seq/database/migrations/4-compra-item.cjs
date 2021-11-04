@@ -7,6 +7,14 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+      compraId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      produtoId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       quantidade: {
         allowNull: false,
         type: Sequelize.INTEGER,

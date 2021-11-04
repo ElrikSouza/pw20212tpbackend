@@ -7,12 +7,16 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+      tipoUsuarioId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       nome: {
-        type: Sequelize.VARCHAR(255),
+        type: Sequelize.STRING(255),
         allowNull: false,
       },
       email: {
-        type: Sequelize.VARCHAR(100),
+        type: Sequelize.STRING(100),
         allowNull: false,
         unique: true,
       },
