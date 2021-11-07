@@ -2,7 +2,7 @@ import { wrapWithErrorHandling } from "../errors/error-handling.js";
 import { ProductsService } from "./products-service.js";
 
 const createProduct = wrapWithErrorHandling(async (req, res) => {
-  const { body, user_id } = req;
+  const { body: product, user_id } = req;
 
   await ProductsService.createProduct(product, user_id);
 
