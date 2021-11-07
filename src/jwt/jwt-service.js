@@ -24,7 +24,7 @@ const getUserIdFromToken = (token) => {
 
     return payload.user_id;
   } catch (_) {
-    throw new Unauthenticated("Invalid authentication token");
+    throw new Unauthenticated("Invalid authorization token");
   }
 };
 

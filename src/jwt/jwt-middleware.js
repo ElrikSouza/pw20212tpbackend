@@ -6,17 +6,17 @@ const splitAuthenticationHeader = (header) => {
   const splitHeader = header.split(" ");
 
   if (splitHeader.length !== 2) {
-    throw new BadRequest("Invalid authentication header");
+    throw new BadRequest("Invalid authorization header");
   }
 
   return splitHeader[1];
 };
 
 const extractJwtFromBearerToken = (req) => {
-  const authenticationHeader = req.headers.authentication;
+  const authenticationHeader = req.headers.authorization;
 
   if (typeof authenticationHeader !== "string") {
-    throw new BadRequest("Authentication header is undefined");
+    throw new BadRequest("Authorization header is undefined");
   }
 
   const token = splitAuthenticationHeader(authenticationHeader);
