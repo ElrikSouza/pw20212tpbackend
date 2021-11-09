@@ -26,8 +26,9 @@ const getOneProduct = wrapWithErrorHandling(async (req, res) => {
   return res.status(200).send(product);
 });
 
-const getAllProducts = wrapWithErrorHandling(async (_, res) => {
-  const products = await ProductsService.getAllProducts();
+const getAllProducts = wrapWithErrorHandling(async (req, res) => {
+  const { query } = req;
+  const products = await ProductsService.getAllProducts(query);
 
   return res.status(200).send(products);
 });

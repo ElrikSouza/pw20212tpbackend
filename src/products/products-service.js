@@ -1,6 +1,8 @@
-import { Forbidden, NotFound } from "../errors/errors.js";
+import { BadRequest, Forbidden, NotFound } from "../errors/errors.js";
 import { PermissionsService } from "../permissions/permissions-service.js";
 import { Products } from "./product.model.js";
+import sequelize from "sequelize";
+const { Op } = sequelize;
 
 const checkPermissions = async (user_id, message) => {
   const isUserAdm = await PermissionsService.isUserAdm(user_id);
@@ -45,11 +47,26 @@ const getOneProduct = async (product_id) => {
   return { product };
 };
 
-// Sem paginacao ainda
-const getAllProducts = async () => {
-  const products = await Products.findAll();
+const buildQueryParams = (query) => {
+  const queryParams = { limit: 10 };
+  if (query.nome) {
+    queryParams["where"] = { nome: { [Op.like]: `%${query.nome}%` } };
+  }
+  if (query.page) {
+    const page = Number.parseInt(query.page);
+    if (page < 1) {
+      throw new BadRequest("Page deve ser um inteiro positivo");
+    }
+    queryParams["offset"] = page * 10;
+  }
+  return queryParams;
+};
 
-  return { products };
+const getAllProducts = async (query) => {
+  const params = buildQueryParams(query);
+  const { count, rows: products } = await Products.findAndCountAll(params);
+
+  return { products, count };
 };
 
 const editableFieldsProduct = ["nome", "preco", "estoque"];
