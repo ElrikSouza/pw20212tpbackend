@@ -12,4 +12,4 @@ ProductsModule.post(
   .delete("/products/:id", jwtMiddleware, ProductsController.deleteProduct)
   .get("/products/:id", ProductsController.getOneProduct)
   .get("/products", ProductsController.getAllProducts)
-  .put("/products/:id", upload, jwtMiddleware, ProductsController.editProduct);
+  .put("/products/:id", jwtMiddleware, ProductsController.editProduct);
