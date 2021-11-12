@@ -57,7 +57,7 @@ const buildQueryParams = (query) => {
     if (page < 1) {
       throw new BadRequest("Page deve ser um inteiro positivo");
     }
-    queryParams["offset"] = page * 10;
+    queryParams["offset"] = (page - 1) * 10;
   }
   return queryParams;
 };
