@@ -1,10 +1,17 @@
 import { NotFound } from "../errors/errors.js";
+import { Roles } from "../roles/role.model.js";
 import { Users } from "./users.model.js";
 
 const getUserCredentials = async (email) => {
   const credentials = await Users.findOne({
     where: { email },
     attributes: ["id", "senha"],
+    include: [
+      {
+        model: Roles,
+        attributes: ["rotulo"],
+      },
+    ],
   });
 
   if (!credentials) {
@@ -15,6 +22,7 @@ const getUserCredentials = async (email) => {
     email,
     id: credentials.id,
     senha: credentials.senha,
+    role: credentials.TipoUsuario.rotulo,
   };
 };
 

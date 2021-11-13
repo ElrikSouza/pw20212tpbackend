@@ -12,12 +12,12 @@ const signUp = wrapWithErrorHandling(async (req, res) => {
 const signIn = wrapWithErrorHandling(async (req, res) => {
   const { body: user } = req;
 
-  const token = await UsersService.signIn(user);
+  const { token, role } = await UsersService.signIn(user);
 
   return res
     .status(200)
     .set("Authorization", `Bearer ${token}`)
-    .send({ token });
+    .send({ token, role });
 });
 
 export const UsersController = {

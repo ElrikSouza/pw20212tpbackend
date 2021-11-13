@@ -33,7 +33,7 @@ const signIn = async (user) => {
 
   const token = JwtService.createToken(userCredentials.id);
 
-  return token;
+  return { token, role: userCredentials.role };
 };
 
 export const UsersService = {

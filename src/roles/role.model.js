@@ -40,6 +40,7 @@ Roles.hasMany(Users, {
   allowNull: false,
   onDelete: "RESTRICT",
   onUpdate: "RESTRICT",
+  required: true,
 });
 
 Users.belongsTo(Roles, {
@@ -48,4 +49,5 @@ Users.belongsTo(Roles, {
   allowNull: false,
   onDelete: "RESTRICT",
   onUpdate: "RESTRICT",
+  required: true,
 });
