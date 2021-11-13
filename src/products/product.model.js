@@ -17,6 +17,10 @@ const getProductsInstance = (sequelize) => {
         autoIncrement: true,
         allowNull: false,
       },
+      img_path: {
+        type: DataTypes.STRING(120),
+        allowNull: true,
+      },
       nome: {
         type: DataTypes.STRING(255),
         allowNull: false,

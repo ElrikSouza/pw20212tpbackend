@@ -2,6 +2,8 @@ import { BadRequest, Forbidden, NotFound } from "../errors/errors.js";
 import { PermissionsService } from "../permissions/permissions-service.js";
 import { Products } from "./product.model.js";
 import sequelize from "sequelize";
+import { ImagesService } from "../image-upload/images-service.js";
+import { v4 } from "uuid";
 const { Op } = sequelize;
 
 const checkPermissions = async (user_id, message) => {
@@ -12,14 +14,28 @@ const checkPermissions = async (user_id, message) => {
   }
 };
 
-const createProduct = async (product, user_id) => {
+const createProduct = async (product, product_image, user_id) => {
   await checkPermissions(user_id, "This user cannot create products");
+  let img_path = null;
 
-  await Products.create({
-    nome: product.nome,
-    preco: product.preco,
-    estoque: product.estoque,
-  });
+  if (product_image.buffer != null) {
+    img_path = await ImagesService.saveImage(
+      product_image.buffer,
+      product_image.mimeType,
+      v4()
+    );
+  }
+  try {
+    await Products.create({
+      nome: product.nome,
+      preco: product.preco,
+      estoque: product.estoque,
+      img_path,
+    });
+  } catch (err) {
+    await ImagesService.deleteImage(img_path);
+    throw err;
+  }
 };
 
 const deleteProduct = async (product_id, user_id) => {
