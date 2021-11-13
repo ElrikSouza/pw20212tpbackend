@@ -7,7 +7,7 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      img_path: {
+      img_filename: {
         allowNull: true,
         type: Sequelize.STRING(120),
       },

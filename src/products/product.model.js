@@ -17,7 +17,7 @@ const getProductsInstance = (sequelize) => {
         autoIncrement: true,
         allowNull: false,
       },
-      img_path: {
+      img_filename: {
         type: DataTypes.STRING(120),
         allowNull: true,
       },
