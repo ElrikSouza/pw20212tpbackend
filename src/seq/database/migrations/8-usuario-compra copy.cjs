@@ -11,9 +11,22 @@ module.exports = {
       onDelete: "cascade",
       onUpdate: "cascade",
     });
+
+    await queryInterface.addConstraint("Compra", {
+      fields: ["enderecoId"],
+      type: "foreign key",
+      name: "compraEnderecoFk",
+      references: {
+        table: "Endereco",
+        field: "id",
+      },
+      onDelete: "restrict",
+      onUpdate: "restrict",
+    });
   },
 
   down: async (queryInterface, _) => {
     await queryInterface.removeConstraint("Compra", "compraFk");
+    await queryInterface.removeConstraint("Compra", "compraEnderecoFk");
   },
 };

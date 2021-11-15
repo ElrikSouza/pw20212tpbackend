@@ -11,6 +11,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      enderecoId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       data: {
         allowNull: false,
         type: Sequelize.DATE,
