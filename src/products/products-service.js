@@ -13,12 +13,14 @@ const checkPermissions = async (user_id, message) => {
 const createProduct = async (product, product_image, user_id) => {
   await checkPermissions(user_id, "This user cannot create products");
 
-  await ProductsRepo.createProduct({
-    nome: product.nome,
-    preco: product.preco,
-    estoque: product.estoque,
-    img_filename,
-  });
+  await ProductsRepo.createProduct(
+    {
+      nome: product.nome,
+      preco: product.preco,
+      estoque: product.estoque,
+    },
+    product_image
+  );
 };
 
 const deleteProduct = async (product_id, user_id) => {
