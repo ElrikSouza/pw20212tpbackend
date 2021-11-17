@@ -1,24 +1,25 @@
 import { CryptService } from "../crypt/crypt.js";
-import { BadRequest, Unauthenticated } from "../errors/errors.js";
+import { Unauthenticated } from "../errors/errors.js";
 import { JwtService } from "../jwt/jwt-service.js";
 import { RolesService } from "../roles/role-service.js";
+import { validateLogin, validateSignUp } from "./users-validator.js";
 import { UsersRepo } from "./users.repo.js";
 
 const signUp = async (user) => {
-  const hashedPassword = await CryptService.hashPassword(user.senha);
+  const validatedUser = await validateSignUp(user);
+
+  const hashedPassword = await CryptService.hashPassword(validatedUser.senha);
   const userRoleId = await RolesService.getUserRoleId();
 
   await UsersRepo.saveUser({
-    ...user,
+    ...validatedUser,
     senha: hashedPassword,
     tipoUsuarioId: userRoleId,
   });
 };
 
 const signIn = async (user) => {
-  if (typeof user.senha !== "string") {
-    throw new BadRequest("Password not found");
-  }
+  await validateLogin(user);
 
   const userCredentials = await UsersRepo.getUserCredentials(user.email);
 
