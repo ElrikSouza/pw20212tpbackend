@@ -73,8 +73,8 @@ const updateOneProduct = async (productId, product_img, changes) => {
   const product = await getOneProduct(productId);
 
   if (product_img.buffer != null) {
-    const { img_filename } = await ProductsRepo.getOneProduct(["img_filename"]);
-    const newFilename = ImagesService.replaceImage(
+    const { img_filename } = await getOneProduct(productId, ["img_filename"]);
+    const newFilename = await ImagesService.replaceImage(
       img_filename,
       product_img.buffer,
       product_img.mimeType,

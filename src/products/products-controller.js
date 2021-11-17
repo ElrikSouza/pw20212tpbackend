@@ -1,12 +1,20 @@
 import { wrapWithErrorHandling } from "../errors/error-handling.js";
 import { ProductsService } from "./products-service.js";
 
-const createProduct = wrapWithErrorHandling(async (req, res) => {
-  const { body: product, user_id } = req;
-  const product_image = {
+const getProductImg = (req) => {
+  if (req.file == null) {
+    return { buffer: null };
+  }
+
+  return {
     buffer: req.file.buffer,
     mimeType: req.file.mimetype,
   };
+};
+
+const createProduct = wrapWithErrorHandling(async (req, res) => {
+  const { body: product, user_id } = req;
+  const product_image = getProductImg(req);
 
   await ProductsService.createProduct(product, product_image, user_id);
 
@@ -40,8 +48,14 @@ const getAllProducts = wrapWithErrorHandling(async (req, res) => {
 const editProduct = wrapWithErrorHandling(async (req, res) => {
   const { id: product_id } = req.params;
   const { body: changes, user_id } = req;
+  const product_image = getProductImg(req);
 
-  await ProductsService.editProduct(product_id, user_id, changes);
+  await ProductsService.editProduct(
+    product_id,
+    user_id,
+    changes,
+    product_image
+  );
 
   return res.status(200).send({ message: "Product has been edited" });
 });
