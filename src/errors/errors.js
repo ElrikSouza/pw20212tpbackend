@@ -23,3 +23,9 @@ export class Forbidden extends ApiError {
     super(403, message);
   }
 }
+
+export class ValidationError extends ApiError {
+  constructor(message) {
+    super(400, message);
+  }
+}
