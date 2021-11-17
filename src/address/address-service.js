@@ -1,4 +1,5 @@
 import { AddressRepo } from "./address-repo.js";
+import { validateAddress } from "./address-validator.js";
 
 const getAddresses = async (user_id) => {
   const result = await AddressRepo.getAddresses(user_id);
@@ -7,7 +8,8 @@ const getAddresses = async (user_id) => {
 };
 
 const createAddress = async (address, user_id) => {
-  await AddressRepo.createAddresss(address, user_id);
+  const validatedAddress = await validateAddress(address);
+  await AddressRepo.createAddresss(validatedAddress, user_id);
 };
 
 export const AddressService = {
