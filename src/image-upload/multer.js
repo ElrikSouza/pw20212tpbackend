@@ -7,7 +7,7 @@ const storage = multer.memoryStorage({
   },
 });
 
-const allowedMimeTypes = ["image/png", "image/jpg", "image/jpge"];
+const allowedMimeTypes = ["image/png", "image/jpg", "image/jpeg"];
 
 export const upload = multer({
   storage,
