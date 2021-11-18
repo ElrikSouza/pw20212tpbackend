@@ -2,6 +2,7 @@ import { v4 } from "uuid";
 import { NotFound } from "../errors/errors.js";
 import { ImagesService } from "../image-upload/images-service.js";
 import { Products } from "./product.model.js";
+import Sequelize from "sequelize";
 
 const createProduct = async (product, product_img) => {
   let img_filename = null;
@@ -91,7 +92,7 @@ const updateOneProduct = async (productId, product_img, changes) => {
 const getAllProductsQueryParams = (query) => {
   const queryParams = { limit: 10 };
   if (query.nome) {
-    queryParams["where"] = { nome: { [Op.like]: `%${query.nome}%` } };
+    queryParams["where"] = { nome: { [Sequelize.Op.like]: `%${query.nome}%` } };
   }
   if (query.page) {
     const page = Number.parseInt(query.page);
