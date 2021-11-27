@@ -15,7 +15,7 @@ const getJwtSecret = () => {
 const secret = getJwtSecret();
 
 const createToken = (user_id) => {
-  return jwt.sign({ user_id }, secret, { expiresIn: "2d" });
+  return jwt.sign({ user_id }, secret, { expiresIn: "7d" });
 };
 
 const getUserIdFromToken = (token) => {
