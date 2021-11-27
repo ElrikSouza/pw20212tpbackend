@@ -24,6 +24,8 @@
   "type": "module",
   "scripts": {
     "sequelize-local": "NODE_ENV=local sequelize",
-    "start-local": "node -r dotenv/config src/server.js dotenv_config_path=.local.env"
+    "start-local": "node -r dotenv/config src/server.js dotenv_config_path=.local.env",
+    "migrate": "sequelize db:migrate",
+    "seed": "sequelize db:seed:all"
   }
 }
